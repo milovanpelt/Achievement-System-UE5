@@ -1,6 +1,9 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "AchievementSystem.h"
+#include <ISettingsModule.h>
+#include "AchievementSystemSettings.h"
+
 
 #define LOCTEXT_NAMESPACE "FAchievementSystemModule"
 
