@@ -16,4 +16,9 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Achievement")
     FString Description;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Achievement")
+    UTexture2D* Icon = nullptr;
+private:
+    bool IsLocked = true;
 };
