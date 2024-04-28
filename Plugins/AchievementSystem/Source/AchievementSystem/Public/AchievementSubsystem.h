@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AchievementSystemSettings.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "AchievementSubsystem.generated.h"
 
@@ -16,4 +17,10 @@ class ACHIEVEMENTSYSTEM_API UAchievementSubsystem : public UGameInstanceSubsyste
 public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	virtual void Deinitialize() override;
+
+	UFUNCTION(BlueprintCallable, Category = "AchievementSubsystem")
+	void Unlock(const FString& Name);
+private:
+	const UAchievementSystemSettings* m_Settings;
+	TMap<FString, FAchievement*> m_Achievements;
 };

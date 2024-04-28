@@ -11,14 +11,14 @@ struct FAchievement
     GENERATED_BODY()
 
 public:
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Achievement")
+    UPROPERTY(EditAnywhere, Category = "Achievement")
     FString Name;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Achievement")
+    UPROPERTY(EditAnywhere, Category = "Achievement")
     FString Description;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Achievement")
+    UPROPERTY(EditAnywhere, Category = "Achievement")
     UTexture2D* Icon = nullptr;
-private:
-    bool IsLocked = true;
+
+    bool IsUnlocked = false;
 };
