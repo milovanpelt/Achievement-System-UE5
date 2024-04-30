@@ -7,9 +7,9 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "AchievementSubsystem.generated.h"
 
-/**
- * 
- */
+// Delegate declaration
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAchievementUnlockedDelegate, const FAchievement&, Achievement);
+
 UCLASS()
 class ACHIEVEMENTSYSTEM_API UAchievementSubsystem : public UGameInstanceSubsystem
 {
@@ -20,6 +20,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "AchievementSubsystem")
 	void Unlock(const FString& Name);
+
+	FAchievementUnlockedDelegate OnAchievementUnlocked;
 private:
 	const UAchievementSystemSettings* m_Settings;
 	TMap<FString, FAchievement*> m_Achievements;

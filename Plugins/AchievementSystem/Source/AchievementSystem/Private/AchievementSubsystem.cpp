@@ -6,42 +6,42 @@
 
 void UAchievementSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
-	m_Settings = NewObject<UAchievementSystemSettings>();
+	Super::Initialize(Collection);
+	m_Settings = GetDefault<UAchievementSystemSettings>();
 
 	if (m_Settings)
 	{
-		for (int i = 0; i < m_Settings->Achievements.Num(); i++)
+		for (const FAchievement& Element : m_Settings->Achievements)
 		{
-			FAchievement* NewAchievement = new FAchievement(m_Settings->Achievements[i]);
-			m_Achievements.Add(m_Settings->Achievements[i].Name, NewAchievement);
+			FAchievement* NewAchievement = new FAchievement(Element);
+			m_Achievements.Add(Element.Name, NewAchievement);
 		}
 	}
 }
 
 void UAchievementSubsystem::Deinitialize()
 {
+	for (auto& Element : m_Achievements)
+	{
+		delete Element.Value;
+	}
 	m_Achievements.Empty();
+	Super::Deinitialize();
 }
 
 void UAchievementSubsystem::Unlock(const FString& Name)
 {
 	FAchievement** FoundAchievement = m_Achievements.Find(Name);
-	if (FoundAchievement)
+	if (FoundAchievement && !(*FoundAchievement)->IsUnlocked)
 	{
-		FAchievement* Achievement = *FoundAchievement;
-		Achievement->IsUnlocked = true;
-		if (Achievement->IsUnlocked)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Achievement unlocked: '%s'"), *Name);
-		}
-		else
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Achievement already unlocked: '%s'"), *Name);
-		}
+		(*FoundAchievement)->IsUnlocked = true;
+
+		OnAchievementUnlocked.Broadcast(**FoundAchievement);
+		UE_LOG(LogTemp, Warning, TEXT("Achievement unlocked: '%s'"), *Name);
 		
 	}
 	else 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Achievement does not exist: '%s'"), *Name);
+		UE_LOG(LogTemp, Warning, TEXT("Achievement already unlocked or does not exist: '%s'"), *Name);
 	}
 }

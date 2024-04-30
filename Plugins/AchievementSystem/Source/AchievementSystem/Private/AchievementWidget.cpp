@@ -7,5 +7,24 @@ void UAchievementWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	UE_LOG(LogTemp, Warning, TEXT("Constructed Achievement Widget"));
+    if (UGameInstance* GameInstance = GetWorld()->GetGameInstance())
+    {
+        UAchievementSubsystem* AchievementSubsystem = GameInstance->GetSubsystem<UAchievementSubsystem>();
+        if (AchievementSubsystem)
+        {
+            AchievementSubsystem->OnAchievementUnlocked.AddDynamic(this, &UAchievementWidget::OnAchievementUnlocked);
+        }
+    }
+}
+
+void UAchievementWidget::OnAchievementUnlocked(const FAchievement& Achievement)
+{
+    if (Achievement.IsUnlocked && Icon && Name && Description)
+    {
+        FText NameText = FText::FromString(Achievement.Name);
+        FText DescriptionText = FText::FromString(Achievement.Description);
+        Icon->SetBrushFromTexture(Achievement.Icon);
+        Name->SetText(NameText);
+        Description->SetText(DescriptionText);
+    }
 }

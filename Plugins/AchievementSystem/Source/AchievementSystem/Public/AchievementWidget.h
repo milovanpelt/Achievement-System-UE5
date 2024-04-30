@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/Textblock.h"
 #include "Components/Image.h"
+#include "AchievementSubsystem.h"
 #include "AchievementWidget.generated.h"
 
 
@@ -27,4 +28,7 @@ protected:
 	UImage* Icon;
 protected:
 	void NativeConstruct() override;
+
+	UFUNCTION()
+	void OnAchievementUnlocked(const FAchievement& Achievement);
 };
