@@ -45,3 +45,15 @@ void UAchievementSubsystem::Unlock(const FString& Name)
 		UE_LOG(LogTemp, Warning, TEXT("Achievement already unlocked or does not exist: '%s'"), *Name);
 	}
 }
+
+TArray<FAchievement*> UAchievementSubsystem::GetAchievements() const
+{
+	// Add the pointer of each achievement to the Result array
+	TArray<FAchievement*> Result;
+	for (const TPair<FString, FAchievement*>& Element : m_Achievements)
+	{
+		Result.Add(Element.Value);
+	}
+	
+	return Result;
+}

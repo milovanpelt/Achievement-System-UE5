@@ -21,6 +21,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "AchievementSubsystem")
 	void Unlock(const FString& Name);
 
+	TArray<FAchievement*> GetAchievements() const;
+
 	FAchievementUnlockedDelegate OnAchievementUnlocked;
 private:
 	const UAchievementSystemSettings* m_Settings;
