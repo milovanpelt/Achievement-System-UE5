@@ -3,28 +3,17 @@
 
 #include "AchievementWidget.h"
 
-void UAchievementWidget::NativeConstruct()
+void UAchievementWidget::SetupAchievement(UTexture2D* newIcon, const FString& newName, const FString& newDescription)
 {
-	Super::NativeConstruct();
+    FText NameText = FText::FromString(newName);
+    FText DescriptionText = FText::FromString(newDescription);
 
-    if (UGameInstance* GameInstance = GetWorld()->GetGameInstance())
-    {
-        UAchievementSubsystem* AchievementSubsystem = GameInstance->GetSubsystem<UAchievementSubsystem>();
-        if (AchievementSubsystem)
-        {
-            AchievementSubsystem->OnAchievementUnlocked.AddDynamic(this, &UAchievementWidget::OnAchievementUnlocked);
-        }
-    }
+    Icon->SetBrushFromTexture(newIcon);
+    Name->SetText(NameText);
+    Description->SetText(DescriptionText);
 }
 
-void UAchievementWidget::OnAchievementUnlocked(const FAchievement& Achievement)
+void UAchievementWidget::NativeConstruct()
 {
-    if (Achievement.IsUnlocked && Icon && Name && Description)
-    {
-        FText NameText = FText::FromString(Achievement.Name);
-        FText DescriptionText = FText::FromString(Achievement.Description);
-        Icon->SetBrushFromTexture(Achievement.Icon);
-        Name->SetText(NameText);
-        Description->SetText(DescriptionText);
-    }
+    Super::NativeConstruct();
 }

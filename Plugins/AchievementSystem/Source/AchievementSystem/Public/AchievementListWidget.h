@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/ScrollBox.h"
 #include "Components/VerticalBox.h"
+#include "AchievementSubsystem.h"
 #include "AchievementListWidget.generated.h"
 
 
@@ -16,14 +17,18 @@ UCLASS()
 class ACHIEVEMENTSYSTEM_API UAchievementListWidget : public UUserWidget
 {
 	GENERATED_BODY()
-
-public:
-	void InitializeAchievements();
-
 protected:
 	UPROPERTY(meta = (BindWidget))
 	UScrollBox* ScrollBox;
 
 	UPROPERTY(meta = (BindWidget))
 	UVerticalBox* VerticalBox;
+protected:
+	void NativeConstruct() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+	TSubclassOf<UUserWidget> AchievementWidgetClass;
+
+	UFUNCTION()
+	void OnAchievementUnlocked(const FAchievement& Achievement);
 };
