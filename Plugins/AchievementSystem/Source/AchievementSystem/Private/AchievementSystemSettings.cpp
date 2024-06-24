@@ -6,5 +6,7 @@
 UAchievementSystemSettings::UAchievementSystemSettings()
 {
 	CategoryName = TEXT("Game");
-	SectionName = TEXT("Achievement System");
 }
+
+
+

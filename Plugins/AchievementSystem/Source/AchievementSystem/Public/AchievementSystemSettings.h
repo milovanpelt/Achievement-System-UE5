@@ -17,6 +17,6 @@ class ACHIEVEMENTSYSTEM_API UAchievementSystemSettings : public UDeveloperSettin
 public:
 	UAchievementSystemSettings();
 
-	UPROPERTY(config, EditAnywhere, Category="Achievements", meta = (TitleProperty = "Name"))
+	UPROPERTY(config, EditAnywhere)
 	TArray<FAchievement> Achievements;
 };
