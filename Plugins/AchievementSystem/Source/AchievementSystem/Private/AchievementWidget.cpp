@@ -3,7 +3,7 @@
 
 #include "AchievementWidget.h"
 
-void UAchievementWidget::SetupAchievement(UTexture2D* newIcon, const FString& newName, const FString& newDescription)
+void UAchievementWidget::ShowAchievement(UTexture2D* newIcon, const FString& newName, const FString& newDescription)
 {
     FText NameText = FText::FromString(newName);
     FText DescriptionText = FText::FromString(newDescription);

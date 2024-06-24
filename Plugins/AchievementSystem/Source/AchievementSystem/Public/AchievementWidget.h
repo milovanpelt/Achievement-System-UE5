@@ -18,7 +18,7 @@ class ACHIEVEMENTSYSTEM_API UAchievementWidget : public UUserWidget
 {
 	GENERATED_BODY()
 public:
-	void SetupAchievement(UTexture2D* newIcon, const FString& newName, const FString& newDescription);
+	void ShowAchievement(UTexture2D* newIcon, const FString& newName, const FString& newDescription);
 protected:
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* Name;

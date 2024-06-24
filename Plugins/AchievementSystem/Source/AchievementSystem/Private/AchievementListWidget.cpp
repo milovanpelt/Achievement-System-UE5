@@ -40,7 +40,7 @@ void UAchievementListWidget::OnAchievementUnlocked(const FAchievement& Achieveme
                             UAchievementWidget* Widget = CreateWidget<UAchievementWidget>(this, AchievementWidgetClass);
                             if (Widget)
                             {
-                                Widget->SetupAchievement(Achievement->Icon, Achievement->Name, Achievement->Description);
+                                Widget->ShowAchievement(Achievement->Icon, Achievement->Name, Achievement->Description);
                                 VerticalBox->AddChild(Widget);
                             }
                         }
